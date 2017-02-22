@@ -1,0 +1,84 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package banco;
+import java.util.Scanner;
+/**
+ *
+ * @author SENA
+ */
+public class Banco {
+    
+    private int numeroCuenta = 0;
+    private int numeroCuentaRetiro = 0;
+    private double saldo = 0;
+    private double retiro = 0;
+    private double consigna = 0;
+    private Scanner entrada;
+    public  void consignar(){
+        System.out.println("Ingresa el numero de cuenta al que desea consignar");
+        entrada = new Scanner(System.in);
+        numeroCuenta = entrada.nextInt();
+        System.out.println("Ingrese el valor a consignar");
+        consigna = entrada.nextDouble();
+        saldo = saldo + consigna;
+        System.out.println("Consignación realizada. Tu nuevo saldo es " + saldo);
+    }
+    
+    public void retirar(){
+        System.out.println("Ingresa tu número de cuenta");
+        entrada = new Scanner(System.in);
+        numeroCuentaRetiro = entrada.nextInt();
+        if (numeroCuenta == numeroCuentaRetiro) {
+            System.out.println("Ingresa la cantidad que deseas retirar");
+            retiro = entrada.nextDouble();
+            if (saldo > retiro) {
+                saldo = saldo - retiro; 
+                System.out.println("Perfecto, tu retiro se ha efectuado correctamente.");
+                System.out.println("Tu nuevo saldo es: " + saldo);
+            }else{
+                System.out.println("No tienes dinero suficiente para retirar esa cantidad");
+            }
+        }else{
+            System.out.println("La cuenta aún no existe");
+        }
+    }
+    
+    public void imprimir(){
+            System.out.println("Tu cuenta es la número: " + numeroCuenta);
+            System.out.println("Tu saldo es : " + saldo);
+    }
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner entrar = new Scanner(System.in);
+        int validar;
+        System.out.println("Ingrese una opción para acceder al programa. Digita 1 para consignar, "
+                + "digita 2 para retirar, digita 3 para imprimir un reporte de tu estado bancario o digita 4 para salir");
+        Banco banco = new Banco();
+        validar = entrar.nextInt();
+        switch (validar){
+            case 1 :
+                banco.consignar();
+                break;
+            case 2 : 
+                banco.retirar();
+                break;
+            case 3 :
+                banco.imprimir();
+                break;
+            case 4 :
+                System.out.println("Has salido del programa");
+                break;
+            default :
+                System.out.println("Has ingresado un valor no permitido");
+                break;
+        }
+        banco.imprimir();
+            
+    }
+    
+}
